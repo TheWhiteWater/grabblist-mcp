@@ -60,6 +60,19 @@ The client discovers Grabblist's OAuth metadata, opens the consent screen, and c
 
 See [TOOLS.md](TOOLS.md) for the complete inventory and scope map.
 
+## Agent resources
+
+The repository includes reusable, credential-free material for humans and agent hosts:
+
+- [Quickstart](docs/QUICKSTART.md) — connect, authorize, verify, and save the first item;
+- [Agent workflows](docs/WORKFLOWS.md) — save, compare, budget, recheck, decide, recover, and share;
+- [Safety guidance](docs/SAFETY.md) — snapshot truth, mutations, personal data, and public sharing;
+- [Ready-to-use prompts](examples/PROMPTS.md) — copy-paste requests for common tasks;
+- [`grabblist-research` skill](skills/grabblist-research/SKILL.md) — portable agent operating guidance;
+- [comparison](skills/grabblist-research/assets/templates/comparison.md), [collection](skills/grabblist-research/assets/templates/collection-brief.md), and [decision](skills/grabblist-research/assets/templates/decision-record.md) templates.
+
+The skill is a Markdown playbook, not an executable plugin. Connect the hosted MCP separately; no credentials are bundled.
+
 ## Authentication
 
 Grabblist supports OAuth 2.0 Authorization Code with PKCE and Dynamic Client Registration.
