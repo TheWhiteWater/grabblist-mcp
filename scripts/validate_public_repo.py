@@ -80,6 +80,26 @@ def validate_tool_inventory() -> None:
         fail(f"tool inventory mismatch: missing={missing}, extra={extra}")
 
 
+def validate_agent_resources() -> None:
+    skill_path = ROOT / "skills" / "grabblist-research" / "SKILL.md"
+    skill = skill_path.read_text(encoding="utf-8")
+    if not skill.startswith("---\nname: grabblist-research\ndescription:"):
+        fail("grabblist-research skill has invalid frontmatter")
+
+    for markdown_path in ROOT.rglob("*.md"):
+        text = markdown_path.read_text(encoding="utf-8")
+        for target in re.findall(r"\[[^]]+\]\(([^)]+)\)", text):
+            if target.startswith(("https://", "http://", "mailto:", "#")):
+                continue
+            relative_target = target.split("#", 1)[0]
+            resolved = (markdown_path.parent / relative_target).resolve()
+            if not resolved.exists() or ROOT not in resolved.parents and resolved != ROOT:
+                fail(
+                    f"broken or escaping local link in "
+                    f"{markdown_path.relative_to(ROOT)}: {target}"
+                )
+
+
 def validate_boundary() -> None:
     required = {
         "README.md",
@@ -89,6 +109,16 @@ def validate_boundary() -> None:
         "NOTICE.md",
         "server.json",
         "mcp.json",
+        "docs/QUICKSTART.md",
+        "docs/WORKFLOWS.md",
+        "docs/SAFETY.md",
+        "examples/PROMPTS.md",
+        "skills/README.md",
+        "skills/grabblist-research/SKILL.md",
+        "skills/grabblist-research/references/START_HERE.md",
+        "skills/grabblist-research/assets/templates/comparison.md",
+        "skills/grabblist-research/assets/templates/collection-brief.md",
+        "skills/grabblist-research/assets/templates/decision-record.md",
     }
     missing = sorted(name for name in required if not (ROOT / name).is_file())
     if missing:
@@ -142,6 +172,7 @@ def validate_boundary() -> None:
 def main() -> None:
     validate_metadata()
     validate_tool_inventory()
+    validate_agent_resources()
     validate_boundary()
     print("public Grabblist MCP repository validation passed")
 
