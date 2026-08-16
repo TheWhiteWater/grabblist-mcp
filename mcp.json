@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "grabblist": {
+      "type": "http",
+      "url": "https://mcp.grabbitapp.com/api/mcp"
+    }
+  }
+}

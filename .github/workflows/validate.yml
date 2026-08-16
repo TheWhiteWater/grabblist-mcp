@@ -1,0 +1,17 @@
+name: Validate public integration repository
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate metadata and public boundary
+        run: python3 scripts/validate_public_repo.py

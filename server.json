@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.grabbitapp/grabblist",
+  "title": "Grabblist",
+  "description": "Save and organize web finds in persistent, user-controlled collections for AI assistants.",
+  "version": "2.1.0",
+  "websiteUrl": "https://grabbitapp.com/docs/mcp",
+  "icons": [
+    {
+      "src": "https://grabbitapp.com/icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.grabbitapp.com/api/mcp"
+    }
+  ]
+}
